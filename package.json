@@ -1,0 +1,17 @@
+{
+  "name": "token-refresh-bot",
+  "version": "1.0.0",
+  "description": "Dedicated Minecraft Bedrock Token Refresh Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "prismarine-auth": "^2.2.0",
+    "uuid": "^9.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "jose": "^5.2.0",
+    "mongoose": "^8.0.0"
+  }
+}
