@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 // Load config from environment variables (for Render) or config.json (for local)
 let config;
-if (process.env.MONGO_URI && process.env.TOKEN) {
+if (process.env.MONGO_URI || process.env.TOKEN) {
     config = {
         token: process.env.TOKEN,
         applicationId: process.env.APPLICATION_ID || '',
