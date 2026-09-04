@@ -3,6 +3,7 @@ const { Client, GatewayIntentBits, SlashCommandBuilder, REST, Routes } = require
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const express = require('express');
 
 // Load config from environment variables (for Render) or config.json (for local)
 let config;
@@ -289,6 +290,22 @@ const tokenCommand = new SlashCommandBuilder()
 const accountsCommand = new SlashCommandBuilder()
     .setName('accounts')
     .setDescription('List all linked Minecraft accounts');
+
+// Express server for uptime monitoring
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.json({ 
+        status: 'ok', 
+        message: 'Token Refresh Bot is running',
+        uptime: process.uptime()
+    });
+});
+
+app.listen(PORT, () => {
+    console.log(`[HTTP Server] Listening on port ${PORT}`);
+});
 
 client.once('ready', async () => {
     console.log(`[Bot] Logged in as ${client.user.tag}`);
