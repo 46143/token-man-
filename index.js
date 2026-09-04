@@ -3,7 +3,24 @@ const { Client, GatewayIntentBits, SlashCommandBuilder, REST, Routes } = require
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const config = require('./config.json');
+
+// Load config from environment variables (for Render) or config.json (for local)
+let config;
+if (process.env.MONGO_URI && process.env.TOKEN) {
+    config = {
+        token: process.env.TOKEN,
+        applicationId: process.env.APPLICATION_ID || '',
+        channels: {
+            refresh: process.env.REFRESH_CHANNEL_ID || '',
+            add: process.env.ADD_CHANNEL_ID || '',
+            expired: process.env.EXPIRED_CHANNEL_ID || ''
+        },
+        mongoURI: process.env.MONGO_URI
+    };
+} else {
+    config = require('./config.json');
+}
+
 const { getAuthCacheEntry, setAuthCacheEntry, getAllAuthCacheEntries, initMongoDB } = require('./authCache');
 
 const client = new Client({
