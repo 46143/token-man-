@@ -15,7 +15,7 @@ if (process.env.MONGO_URI || process.env.TOKEN) {
             add: process.env.ADD_CHANNEL_ID || '',
             expired: process.env.EXPIRED_CHANNEL_ID || ''
         },
-        mongoURI: process.env.MONGO_URI
+        mongodbUri: process.env.MONGO_URI
     };
 } else {
     config = require('./config.json');
